@@ -1,0 +1,11 @@
+/Users/sarahfahlen/Desktop/Studie/3. sem/Software arkitektur/Projekt/ProjektSolution/shared/bin/Debug/net9.0/shared.deps.json
+/Users/sarahfahlen/Desktop/Studie/3. sem/Software arkitektur/Projekt/ProjektSolution/shared/bin/Debug/net9.0/shared.dll
+/Users/sarahfahlen/Desktop/Studie/3. sem/Software arkitektur/Projekt/ProjektSolution/shared/bin/Debug/net9.0/shared.pdb
+/Users/sarahfahlen/Desktop/Studie/3. sem/Software arkitektur/Projekt/ProjektSolution/shared/obj/Debug/net9.0/shared.GeneratedMSBuildEditorConfig.editorconfig
+/Users/sarahfahlen/Desktop/Studie/3. sem/Software arkitektur/Projekt/ProjektSolution/shared/obj/Debug/net9.0/shared.AssemblyInfoInputs.cache
+/Users/sarahfahlen/Desktop/Studie/3. sem/Software arkitektur/Projekt/ProjektSolution/shared/obj/Debug/net9.0/shared.AssemblyInfo.cs
+/Users/sarahfahlen/Desktop/Studie/3. sem/Software arkitektur/Projekt/ProjektSolution/shared/obj/Debug/net9.0/shared.csproj.CoreCompileInputs.cache
+/Users/sarahfahlen/Desktop/Studie/3. sem/Software arkitektur/Projekt/ProjektSolution/shared/obj/Debug/net9.0/shared.dll
+/Users/sarahfahlen/Desktop/Studie/3. sem/Software arkitektur/Projekt/ProjektSolution/shared/obj/Debug/net9.0/refint/shared.dll
+/Users/sarahfahlen/Desktop/Studie/3. sem/Software arkitektur/Projekt/ProjektSolution/shared/obj/Debug/net9.0/shared.pdb
+/Users/sarahfahlen/Desktop/Studie/3. sem/Software arkitektur/Projekt/ProjektSolution/shared/obj/Debug/net9.0/ref/shared.dll

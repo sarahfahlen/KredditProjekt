@@ -1,0 +1,107 @@
+﻿<!-- 
+Notice how this route has a route parameter 'id'. This is how we can pass data to the route.
+See how the links are made in 'PostList.razor'.
+-->
+@page "/post/{id}"
+
+@using kreddit_app.Data;
+@using shared.Model;
+@inject ApiService apiService
+@inject NavigationManager Navigation
+
+<PageTitle>Kreddit</PageTitle>
+
+<button class="btn btn-secondary" @onclick="GoBack"> Return to home </button>
+
+
+@if (Post == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="post-container">
+        <h4>@Post.Title</h4>
+        <p class="post-meta">
+            User: <strong>@Post.Author</strong> ·
+            Votes: @(Post.Upvotes - Post.Downvotes) ·
+            @Post.CreatedDate.ToShortDateString()
+        </p>
+        <p class="post-content">@Post.Content</p>
+
+
+        <div class="comments-section">
+            <h4>Comments</h4>
+
+            @if (Post.Comments == null || !Post.Comments.Any())
+            {
+                <p><em>No comments yet — be the first!</em></p>
+            }
+            else
+            {
+                @foreach (var comment in Post.Comments)
+                {
+                    <div class="comment-card">
+                        <div class="comment-meta">
+                            <strong>@comment.Author</strong>
+                            @comment.CreatedDate.ToShortDateString()
+                        </div>
+                        <div class="comment-content">@comment.Content</div>
+
+                        <div class="comment-votes">
+                            <button class="up" @onclick="() => Upvote(Post.Id, comment.Id)">▲</button>
+                            <span class="score">@(@comment.Upvotes - @comment.Downvotes)</span>
+                            <button class="down" @onclick="() => Downvote(Post.Id, comment.Id)">▼</button>
+                        </div>
+                    </div>
+                }
+            }
+
+            <button class="btn btn-success" @onclick="() => newCommentModal.Open()">Write a comment</button>
+
+            <ModalDialog @ref="newCommentModal" Title="Write your comment">
+                <CreateComment PostId=@PostId OnCommentCreated="OnCommentCreated"></CreateComment>
+            </ModalDialog>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+    public int PostId { get { return int.Parse(Id); } }
+    public Post Post { get; set; }
+    private ModalDialog? newCommentModal;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        Post = await apiService.GetPost(PostId);
+    }
+    
+    private void GoBack()
+    {
+        Navigation.NavigateTo("/", forceLoad: false); 
+    }
+    
+
+    private async Task Upvote(int postid, int commentid)
+    {
+        await apiService.UpvoteComment(postid, commentid);
+        Post = await apiService.GetPost(PostId);
+        StateHasChanged();
+    }
+
+    private async Task Downvote(int postid, int commentid)
+    {
+        await apiService.DownvoteComment(postid, commentid);
+        Post = await apiService.GetPost(PostId);
+        StateHasChanged();
+    }
+    
+    private async Task OnCommentCreated()
+    {
+        newCommentModal?.Close();
+        Post = await apiService.GetPost(PostId);
+    }
+}

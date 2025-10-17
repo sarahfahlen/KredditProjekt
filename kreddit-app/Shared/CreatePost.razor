@@ -1,0 +1,36 @@
+@using kreddit_app.Data;
+@inject ApiService apiService
+
+<div>
+    <br/>
+    <h3>Create a new post</h3>
+    <input placeholder="Title" type="text" id="title" @bind-value="title"/>
+    <input placeholder="Content" type="text" id="content" @bind-value="content"/>
+    <input placeholder="Your name" type="text" id ="author" @bind="author"/>
+    <button id="createPostButton" type="button" @onclick="CreateNewPost">Publish post</button>
+</div>
+
+@code {
+    private string? title;
+    private string? content;
+    private string? author;
+    
+    [Parameter]
+    public EventCallback OnPostCreated { get; set; }
+    
+    private async Task CreateNewPost()
+    {
+        if (content == null)
+        {
+            return;
+        }
+        await apiService.CreatePost(title, content, author);
+
+        title = string.Empty;
+        content = string.Empty;
+        author = string.Empty;
+        
+        await OnPostCreated.InvokeAsync();
+    }
+    
+}

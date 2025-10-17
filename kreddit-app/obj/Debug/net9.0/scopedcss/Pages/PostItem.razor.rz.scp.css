@@ -1,0 +1,110 @@
+/* --- Hovedindhold (posten) --- */
+.post-container[b-bq1bsrih0q] {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border: 2px solid #452d3d;
+    border-radius: 16px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.post-container h4[b-bq1bsrih0q] {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2e2e2e;
+    margin-bottom: 10px;
+}
+
+.post-meta[b-bq1bsrih0q] {
+    text-align: center;
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+}
+
+.post-content[b-bq1bsrih0q] {
+    color: #333;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* --- Kommentar-sektion --- */
+.comments-section[b-bq1bsrih0q] {
+    margin-top: 30px;
+}
+
+.comment-card[b-bq1bsrih0q] {
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.comment-card:hover[b-bq1bsrih0q] {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.comment-meta[b-bq1bsrih0q] {
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 6px;
+}
+
+.comment-content[b-bq1bsrih0q] {
+    color: #222;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+/* --- Stemmer på kommentarer --- */
+.comment-votes[b-bq1bsrih0q] {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.comment-votes button[b-bq1bsrih0q] {
+    border: none;
+    background: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: transform 0.1s ease;
+}
+
+.comment-votes button:hover[b-bq1bsrih0q] {
+    transform: scale(1.2);
+}
+
+.comment-votes .up[b-bq1bsrih0q] {
+    color: #22c55e;
+}
+
+.comment-votes .down[b-bq1bsrih0q] {
+    color: #ef4444;
+}
+
+.comment-votes .score[b-bq1bsrih0q] {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* --- Modal-knap og generel layout --- */
+.btn-secondary[b-bq1bsrih0q] {
+    margin-bottom: 20px;
+}
+
+.comments-section h4[b-bq1bsrih0q] {
+    margin-bottom: 12px;
+    text-align: center;
+    font-weight: 600;
+    color: #2f2f2f;
+}

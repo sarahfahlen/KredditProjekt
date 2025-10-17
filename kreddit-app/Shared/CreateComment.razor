@@ -1,0 +1,36 @@
+@using kreddit_app.Data;
+@inject ApiService apiService
+
+<div>
+    <br/>
+    <h3>Write a comment</h3>
+    <input placeholder="Your name" type="text" id ="author" @bind="author"/>
+    <input placeholder="Content" type="text" id="content" @bind-value="content"/>
+    <button id="createPostButton" type="button" @onclick="CreateNewComment">Post comment</button>
+</div>
+
+@code {
+
+    // PostId is passed in from the parent component. See how in PostItem.razor.
+    [Parameter]
+    public int PostId { get; set; }
+    [Parameter]
+    public EventCallback OnCommentCreated { get; set; }
+    
+    private string? author;
+    private string? content;
+    
+    private async Task CreateNewComment()
+    {
+        if (content == null)
+        {
+            return;
+        }
+        await apiService.CreateComment(PostId, author, content);
+        
+        author = string.Empty;
+        content = string.Empty;
+        
+        await OnCommentCreated.InvokeAsync();
+    }
+}

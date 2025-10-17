@@ -1,0 +1,85 @@
+﻿@inherits LayoutComponentBase
+
+@using kreddit_app.Data;
+@using shared.Model;
+@inject ApiService apiService
+
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+@if (posts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="post-grid">
+        @foreach (var post in posts)
+        {
+            <div class="post-card">
+                <!-- TITEL med link til post -->
+                <h4 class="post-title">
+                    <a href="/post/@post.Id">@post.Title</a>
+                </h4>
+
+                <!-- INDHOLD -->
+                <p class="post-content">@post.Content</p>
+
+                <!-- META: dato + forfatter -->
+                <div class="post-meta">
+                    <span>@post.CreatedDate.ToShortDateString()</span>
+                    <span>·</span>
+                    <span>@post.Author</span>
+                </div>
+
+                <!-- FOOTER: stemmer -->
+                <div class="post-footer">
+                    <button class="vote-btn up" @onclick="() => Upvote(post.Id)">▲</button>
+                    <span class="vote-score">@(@post.Upvotes - @post.Downvotes)</span>
+                    <button class="vote-btn down" @onclick="() => Downvote(post.Id)">▼</button>
+                </div>
+            </div>
+        }
+    </div>
+
+    <button class="btn btn-primary mt-3" @onclick="() => createPostModal.Open()">➕ Create new post</button>
+
+    <ModalDialog @ref="createPostModal" Title="Opret nyt post">
+        <CreatePost OnPostCreated="OnPostCreated"></CreatePost>
+    </ModalDialog>
+}
+
+@code {
+    private Post[]? posts;
+    private Post? votePost;
+    private ModalDialog? createPostModal;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadPosts();
+    }
+    
+    private async Task LoadPosts()
+    {
+        posts = await apiService.GetPosts();
+        StateHasChanged();
+    }
+
+    private async Task Upvote(int id)
+    { 
+        await apiService.UpvotePost(id);
+        await LoadPosts();
+    }
+
+    private async Task Downvote(int id)
+    {
+        await apiService.DownvotePost(id);
+        await LoadPosts();
+    }
+    
+    private async Task OnPostCreated()
+    {
+        createPostModal?.Close();
+        await LoadPosts();
+    }
+}
